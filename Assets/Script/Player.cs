@@ -9,6 +9,7 @@ public class Player : MonoBehaviour {
 	public GameObject playerCamera;
 	public GameObject respawn;
 	public Text forceText;
+	public Text getBallText;
 
 	[Space]
 
@@ -72,6 +73,7 @@ public class Player : MonoBehaviour {
 			rb.useGravity = false;
 			rb.velocity = Vector3.zero;
 			print("Мяч получен");
+			getBallText.gameObject.SetActive(false);
 		}
 	}
 
