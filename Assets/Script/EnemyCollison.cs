@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class EnemyCollison : MonoBehaviour
 {
-
-	//private GameObject enemyMaster;
+	
 	private Rigidbody rb;
 	public Player player;
 	public float MoveSpeed = 5;
@@ -20,7 +19,8 @@ public class EnemyCollison : MonoBehaviour
 			if (Vector3.Distance(transform.position, ball.position) >= MinDist) {
 
 				transform.position += transform.forward * MoveSpeed * Time.deltaTime;
-				
+				transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
+
 				if (Vector3.Distance(transform.position, ball.position) <= MaxDist) {
 					player.ReturnBall();
 				}

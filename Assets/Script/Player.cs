@@ -20,6 +20,8 @@ public class Player : MonoBehaviour {
 	public float ballThrowingForceMax = 1000f;
 	[Range(5, 50)]
 	public float ballThrowingForceRange = 20f;
+	public float ballThrowingForceRandMin = -0.10f;
+	public float ballThrowingForceRandMax = 0.10f;
 
 
 	public bool holdingBall = true;
@@ -82,6 +84,22 @@ public class Player : MonoBehaviour {
 		holdingBall = false;
 		rb.useGravity = true;
 
-		rb.AddForce(playerCamera.transform.forward * ballThrowingForce);
+		
+		float randomNumber = Random.Range(ballThrowingForceRandMin, ballThrowingForceRandMax);
+
+		Debug.Log(randomNumber);
+
+		ballThrowingForceRandMin -= (ballThrowingForceRandMin / 100) * 5;
+		ballThrowingForceRandMax -= (ballThrowingForceRandMax / 100) * 5;
+
+		Vector3 ptf = playerCamera.transform.forward;
+		ptf.x = ptf.x + randomNumber;
+		ptf.y = ptf.y + randomNumber;
+
+		float randomForce = Random.Range(-50, 50);
+		float ballThrowingForceRand = ballThrowingForce + randomForce;
+		forceText.text = "Сила броска: " + ballThrowingForceRand;
+
+		rb.AddForce(ptf * ballThrowingForceRand);
 	}
 }
